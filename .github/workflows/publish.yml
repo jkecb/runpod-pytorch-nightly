@@ -14,5 +14,4 @@ jobs:
       - name: Build the runpod-template-pytorch2 Docker image
         run: |
           docker build . --tag ghcr.io/kesar/runpod-template-pytorch2:latest
-          docker run ghcr.io/kesar/runpod-template-pytorch2:latest
           docker push ghcr.io/kesar/runpod-template-pytorch2:latest
