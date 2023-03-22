@@ -11,7 +11,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build runpod-template-pytorch2 Docker image
+      - name: Build the runpod-template-pytorch2 Docker image
         run: |
           docker build . --tag ghcr.io/kesar/runpod-template-pytorch2:latest
           docker push ghcr.io/kesar/runpod-template-pytorch2:latest
