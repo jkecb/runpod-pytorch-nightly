@@ -1,7 +1,7 @@
 name: publish
 on: [push]
 jobs:
-  publish-runpod-template-pytorch2-image:
+  publish-runpod-pytorch-nightl-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
