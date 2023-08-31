@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+FROM nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04
 
 WORKDIR /
 
@@ -17,7 +17,8 @@ RUN apt-get update --yes && \
     curl\
     bash\
     software-properties-common\
-    openssh-server
+    openssh-server\
+    libaio-dev
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt install python3.10 -y --no-install-recommends && \
 	ln -s /usr/bin/python3.10 /usr/bin/python && \
@@ -27,7 +28,7 @@ RUN apt install python3.10 -y --no-install-recommends && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 RUN python get-pip.py
-RUN pip install --no-cache-dir --pre torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/nightly/cu118
+RUN pip install --no-cache-dir --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
 RUN pip install --no-cache-dir -U jupyterlab ipywidgets jupyter-archive
 RUN jupyter nbextension enable --py widgetsnbextension
 RUN jupyter labextension disable "@jupyterlab/apputils-extension:announcements"
