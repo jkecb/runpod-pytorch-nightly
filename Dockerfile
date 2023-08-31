@@ -18,16 +18,9 @@ RUN apt-get update --yes && \
     bash\
     software-properties-common\
     openssh-server\
-    libaio-dev
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt install python3.10 -y --no-install-recommends && \
-	ln -s /usr/bin/python3.10 /usr/bin/python && \
-	rm /usr/bin/python3 && \
-	ln -s /usr/bin/python3.10 /usr/bin/python3 && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-RUN python get-pip.py
+    libaio-dev\
+    python3-pip
+RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 RUN pip install --no-cache-dir --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
 RUN pip install --no-cache-dir -U jupyterlab ipywidgets jupyter-archive
 RUN jupyter nbextension enable --py widgetsnbextension
