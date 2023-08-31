@@ -13,5 +13,5 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build the runpod-pytorch-nightly Docker image
         run: |
-          docker build . --tag ghcr.io/jkecb/runpod-pytorch-nightly:latest
-          docker push ghcr.io/jkecb/runpod-pytorch-nightly:latest
+          docker build . --tag ghcr.io/amadeuskkj/runpod-pytorch-nightly:latest
+          docker push ghcr.io/amadeuskkj/runpod-pytorch-nightly:latest

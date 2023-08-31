@@ -20,7 +20,8 @@ RUN apt-get update --yes && \
     openssh-server\
     libaio-dev\
     python3-pip
-RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 RUN pip install --no-cache-dir --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
 RUN pip install --no-cache-dir -U jupyterlab ipywidgets jupyter-archive notebook==6.5.4
 RUN jupyter nbextension enable --py widgetsnbextension
