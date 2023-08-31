@@ -22,7 +22,8 @@ RUN apt-get update --yes && \
     python3-pip
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 RUN pip install --no-cache-dir --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
-RUN pip install --no-cache-dir -U jupyterlab ipywidgets jupyter-archive
+RUN pip install --no-cache-dir -U jupyterlab ipywidgets jupyter-archive jupyter_contrib_nbextensions
+RUN jupyter contrib nbextension install
 RUN jupyter nbextension enable --py widgetsnbextension
 RUN jupyter labextension disable "@jupyterlab/apputils-extension:announcements"
 
