@@ -5,8 +5,9 @@ WORKDIR /
 RUN mkdir /workspace
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-ENV DEBIAN_FRONTEND noninteractive\
-    SHELL=/bin/bash
+ENV DEBIAN_FRONTEND=noninteractive\
+    SHELL=/bin/bash\
+    VSCODE_SERVE_MODE=remote
 RUN apt-get update --yes && \
     # - apt-get upgrade is run to patch known vulnerabilities in apt-get packages as
     #   the ubuntu base image is rebuilt too seldom sometimes (less than once a month)
@@ -20,7 +21,9 @@ RUN apt-get update --yes && \
     openssh-server\
     libaio-dev\
     python3-pip
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* && \
+RUN apt-get install -y --no-install-recommends software-properties-commo
+RUN /bin/sh -c wget -q -O- https://aka.ms/install-vscode-server/setup.sh | sh 
+RUN apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 RUN pip install --no-cache-dir --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
 RUN pip install --no-cache-dir -U jupyterlab ipywidgets jupyter-archive notebook==6.5.4
