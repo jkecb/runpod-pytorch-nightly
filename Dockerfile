@@ -21,7 +21,6 @@ RUN apt-get update --yes && \
     openssh-server\
     libaio-dev\
     python3-pip
-RUN apt-get install -y --no-install-recommends software-properties-commo
 RUN wget -q -O- https://aka.ms/install-vscode-server/setup.sh | sh 
 RUN apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
