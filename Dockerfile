@@ -22,7 +22,7 @@ RUN apt-get update --yes && \
     libaio-dev\
     python3-pip
 RUN apt-get install -y --no-install-recommends software-properties-commo
-RUN /bin/sh -c wget -q -O- https://aka.ms/install-vscode-server/setup.sh | sh 
+RUN wget -q -O- https://aka.ms/install-vscode-server/setup.sh | sh 
 RUN apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 RUN pip install --no-cache-dir --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
