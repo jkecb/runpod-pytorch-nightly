@@ -8,6 +8,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive\
     SHELL=/bin/bash\
     VSCODE_SERVE_MODE=remote
+RUN . /etc/lsb-release && \
+    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | \
+    env os=ubuntu dist="${DISTRIB_CODENAME}" bash
 RUN apt-get update --yes && \
     # - apt-get upgrade is run to patch known vulnerabilities in apt-get packages as
     #   the ubuntu base image is rebuilt too seldom sometimes (less than once a month)
