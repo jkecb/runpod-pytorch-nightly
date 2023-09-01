@@ -21,7 +21,9 @@ RUN apt-get update --yes && \
     openssh-server\
     libaio-dev\
     python3-pip
-RUN wget -q -O- https://aka.ms/install-vscode-server/setup.sh | sh 
+RUN curl -Lk 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64' --output vscode_cli.tar.gz && \
+    tar -xf vscode_cli.tar.gz -C /usr/local/bin/ && \
+    chmod +x /usr/local/bin/code && rm -f vscode_cli.tar.gz
 RUN apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 RUN pip install --no-cache-dir --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
