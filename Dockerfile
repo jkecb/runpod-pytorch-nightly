@@ -8,9 +8,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive\
     SHELL=/bin/bash\
     VSCODE_SERVE_MODE=remote
-RUN . /etc/lsb-release && \
-    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | \
-    env os=ubuntu dist="${DISTRIB_CODENAME}" bash
 RUN apt-get update --yes && \
     # - apt-get upgrade is run to patch known vulnerabilities in apt-get packages as
     #   the ubuntu base image is rebuilt too seldom sometimes (less than once a month)
@@ -27,6 +24,9 @@ RUN apt-get update --yes && \
     git-lfs\
     python-is-python3
 RUN git lfs install
+RUN . /etc/lsb-release && \
+    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | \
+    env os=ubuntu dist="${DISTRIB_CODENAME}" bash
 RUN curl -Lk 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64' --output vscode_cli.tar.gz && \
     tar -xf vscode_cli.tar.gz -C /usr/local/bin/ && \
     chmod +x /usr/local/bin/code && rm -f vscode_cli.tar.gz
