@@ -23,7 +23,9 @@ RUN apt-get update --yes && \
     software-properties-common\
     openssh-server\
     libaio-dev\
-    python3-pip
+    python3-pip\
+    git-lfs
+RUN git lfs install
 RUN curl -Lk 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64' --output vscode_cli.tar.gz && \
     tar -xf vscode_cli.tar.gz -C /usr/local/bin/ && \
     chmod +x /usr/local/bin/code && rm -f vscode_cli.tar.gz
